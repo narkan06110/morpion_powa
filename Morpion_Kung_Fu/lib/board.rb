@@ -6,16 +6,16 @@ require_relative 'Game'
 
 class Board
   attr_accessor :cells
-#Permet de mettre à jour le tableau en fonction des inputs du joueur tout en garatissant que la cellule soit vide
-  def initialize
+
+  def initialize #aray servant de réference au tableau
     @cells = [
     "1", "2", "3",
     "4", "5", "6",
     "7", "8", "9"
     ]
   end
-#Affichage du corps du tableau (valeurs de base + lignes verticales et horizontales)
-  def update_cell(number, form)
+
+  def update_cell(number, form) # si la case est libre remplace le nombre dans le aray par le form du joueur en cours.
     if cell_free?(number)
       self.cells[number - 1] = form.to_s
       show_board
@@ -24,10 +24,8 @@ class Board
       return false
     end
   end
-#permet de limiter cette méthode à la classe Board
-#Permet de remplacer les cellules par le signe du joueur en checkant si elles
-#sont vides, sinon la cellule n'est pas complétée
-  def show_board
+
+  def show_board #Corp du plateau
     hline = "\u2502"
     vline = "\u2500"
     cross = "\u253C"
@@ -51,8 +49,8 @@ class Board
 
 #permet de limiter cette méthode à la classe Board
   private
-#Permet de remplacer les cellules par le signe du joueur en checkant si elles sont vides, sinon la cellule n'est pas complétée
-  def cell_free?(number)
+
+  def cell_free?(number) #Verifie si la place dans le array est deja occupé par une X ou un 0
     cell = self.cells[number - 1]
     if cell == "X" ||  cell == "O"
       false
